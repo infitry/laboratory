@@ -1,0 +1,20 @@
+logging:
+  level:
+    root: INFO
+
+spring:
+  profiles:
+    active: local
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/laboratory
+    username: root
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      properties:
+        hibernate:
+          format_sql: true
+      defer-datasource-initialization: true
