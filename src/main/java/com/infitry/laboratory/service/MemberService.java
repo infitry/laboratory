@@ -17,19 +17,22 @@ public class MemberService {
     private final GroupRepository groupRepository;
     private final MemberRepository memberRepository;
 
-    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void insertMember() {
         log.info("Thread - {} Transaction Start", Thread.currentThread().getId());
         var group = groupRepository.findById(1L);
-        memberRepository.save(new Member(null, "이름", "닉네임", "1111", 1));
+        groupRepository.flush();
         log.info("find group : {}", group);
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        memberRepository.save(new Member(null, "이름", "닉네임", "1111", 1));
         var savedMember = memberRepository.findById(4L);
         log.info("save member - {}", savedMember);
+        var afterSaveGroup = groupRepository.findById(1L);
+        log.info("after save group : {}", afterSaveGroup);
         log.info("Thread - {} Transaction End", Thread.currentThread().getId());
     }
 }

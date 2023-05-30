@@ -34,13 +34,13 @@ public class GroupService {
         log.info("Thread - {} Transaction End", Thread.currentThread().getId());
     }
 
-    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void updateGroup(String groupCode) {
         log.info("Thread - {} Transaction Start", Thread.currentThread().getId());
         var findGroup = groupRepository.findById(1L).orElseThrow(NoSuchElementException::new);
         findGroup.setCode(groupCode);
         groupRepository.save(findGroup);
-        log.info("updated group code");
+        log.info("updated group code : {}", groupCode);
         log.info("Thread - {} Transaction End", Thread.currentThread().getId());
     }
 }
