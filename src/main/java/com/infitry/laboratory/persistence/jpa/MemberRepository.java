@@ -1,4 +1,4 @@
-package com.infitry.laboratory.persistence;
+package com.infitry.laboratory.persistence.jpa;
 
 import com.infitry.laboratory.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

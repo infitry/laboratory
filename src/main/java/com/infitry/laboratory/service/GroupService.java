@@ -1,9 +1,10 @@
 package com.infitry.laboratory.service;
 
-import com.infitry.laboratory.entity.Member;
+import com.infitry.laboratory.config.aop.ThreadTrace;
 import com.infitry.laboratory.entity.MemberGroup;
-import com.infitry.laboratory.persistence.GroupRepository;
-import com.infitry.laboratory.persistence.MemberRepository;
+import com.infitry.laboratory.persistence.jpa.GroupRepository;
+import com.infitry.laboratory.persistence.jpa.MemberRepository;
+import com.infitry.laboratory.persistence.mybatis.GroupMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class GroupService {
     private final GroupRepository groupRepository;
+    private final GroupMapper groupMapper;
     private final MemberRepository memberRepository;
 
     @Transactional
@@ -26,21 +28,37 @@ public class GroupService {
 
     @Transactional(readOnly = true)
     public void findAllGroup() {
-        log.info("Thread - {} Transaction Start", Thread.currentThread().getId());
         var allGroups = groupRepository.findAll();
         log.info("All group : {}", allGroups);
         var findMember = memberRepository.findById(4L);
         log.info("readOnly find member : {}", findMember);
-        log.info("Thread - {} Transaction End", Thread.currentThread().getId());
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @ThreadTrace
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     public void updateGroup(String groupCode) {
-        log.info("Thread - {} Transaction Start", Thread.currentThread().getId());
         var findGroup = groupRepository.findById(1L).orElseThrow(NoSuchElementException::new);
         findGroup.setCode(groupCode);
         groupRepository.save(findGroup);
         log.info("updated group code : {}", groupCode);
-        log.info("Thread - {} Transaction End", Thread.currentThread().getId());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @ThreadTrace
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    public void updateGroupByMybatis(String groupCode) {
+        var findGroup = groupMapper.findById(1L);
+        findGroup.setCode(groupCode);
+        groupMapper.updateGroup(findGroup);
+        log.info("updated group code : {}", groupCode);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
