@@ -16,13 +16,13 @@ public class ThreadTraceAop {
     @Around("threadTrace()")
     public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
-        log.info("START : " + joinPoint.toString());
+        log.info("[START] ---- " + joinPoint + " ----");
         try {
             return joinPoint.proceed();
         } finally {
             long finish = System.currentTimeMillis();
             long timeMs = finish - start;
-            log.info("END : " + joinPoint + " " + timeMs + " ms");
+            log.info("[END] ---- " + joinPoint + " " + timeMs + " ms ----");
         }
     }
 }

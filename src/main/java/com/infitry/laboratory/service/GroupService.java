@@ -16,6 +16,7 @@ import java.util.NoSuchElementException;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class GroupService {
     private final GroupRepository groupRepository;
     private final GroupMapper groupMapper;
@@ -26,7 +27,6 @@ public class GroupService {
         groupRepository.save(memberGroup);
     }
 
-    @Transactional(readOnly = true)
     public void findAllGroup() {
         var allGroups = groupRepository.findAll();
         log.info("All group : {}", allGroups);

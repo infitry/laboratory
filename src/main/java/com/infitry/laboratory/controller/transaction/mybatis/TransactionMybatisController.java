@@ -1,6 +1,5 @@
-package com.infitry.laboratory.controller.jpa;
+package com.infitry.laboratory.controller.transaction.mybatis;
 
-import com.infitry.laboratory.entity.MemberGroup;
 import com.infitry.laboratory.service.GroupService;
 import com.infitry.laboratory.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -9,29 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/jpa")
+@RequestMapping("/my-batis")
 @RequiredArgsConstructor
-public class TransactionTestController {
+public class TransactionMybatisController {
+
     private final GroupService groupService;
     private final MemberService memberService;
 
     @GetMapping("/transaction")
     public void lock() {
-        memberService.insertMember();
-    }
-
-    @GetMapping("/insert/groups")
-    public void insertGroup() {
-        groupService.saveGroup(new MemberGroup(null, "신규그룹", "A1"));
-    }
-
-    @GetMapping("/groups")
-    public void getGroups() {
-        groupService.findAllGroup();
+        memberService.myBatisReadUncommitted();
     }
 
     @GetMapping("/update/group")
     public void updateGroup(String groupCode) {
-        groupService.updateGroup(groupCode);
+        groupService.updateGroupByMybatis(groupCode);
     }
 }
