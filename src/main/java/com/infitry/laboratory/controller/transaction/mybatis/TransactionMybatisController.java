@@ -1,7 +1,7 @@
 package com.infitry.laboratory.controller.transaction.mybatis;
 
-import com.infitry.laboratory.service.GroupService;
-import com.infitry.laboratory.service.MemberService;
+import com.infitry.laboratory.service.transaction.GroupService;
+import com.infitry.laboratory.service.transaction.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
