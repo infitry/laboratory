@@ -2,7 +2,12 @@ logging:
   level:
     root: INFO
 
+server:
+  shutdown: graceful
+
 spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
   profiles:
     active: local
   datasource:
