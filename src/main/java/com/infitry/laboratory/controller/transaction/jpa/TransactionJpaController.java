@@ -1,4 +1,4 @@
-package com.infitry.laboratory.controller.transaction.mybatis;
+package com.infitry.laboratory.controller.transaction.jpa;
 
 import com.infitry.laboratory.service.transaction.FirstTransactionService;
 import com.infitry.laboratory.service.transaction.SecondTransactionService;
@@ -8,20 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/transactions/my-batis")
+@RequestMapping("/transactions/jpa")
 @RequiredArgsConstructor
-public class TransactionMybatisController {
-
+public class TransactionJpaController {
     private final FirstTransactionService firstTransactionService;
     private final SecondTransactionService secondTransactionService;
 
     @GetMapping("/second")
     public void executeSecondTransaction() {
-        secondTransactionService.readUncommittedForMyBatis();
+        secondTransactionService.readUncommittedForJpa();
     }
 
     @GetMapping("/first")
     public void executeFirstTransaction(String groupCode) {
-        firstTransactionService.readUncommittedFirstTransactionForMybatis(groupCode);
+        firstTransactionService.readUncommittedFirstTransactionForJpa(groupCode);
     }
 }
