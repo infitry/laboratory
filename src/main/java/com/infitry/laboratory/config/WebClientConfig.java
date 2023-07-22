@@ -13,8 +13,10 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
+import reactor.netty.resources.ConnectionProvider;
 import reactor.netty.transport.logging.AdvancedByteBufFormat;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -27,7 +29,7 @@ public class WebClientConfig {
 
     @Bean
     public WebClient webClient() {
-        HttpClient httpClient = HttpClient.create()
+        HttpClient httpClient = HttpClient.create(createConnectionProvider())
                 .compress(true)
                 .wiretap("reactor.netty.http.client.HttpClient", LogLevel.INFO, AdvancedByteBufFormat.TEXTUAL)
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, CONNECT_TIMEOUT)
@@ -44,6 +46,16 @@ public class WebClientConfig {
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
                 .exchangeStrategies(exchangeStrategies)
                 .filter(addLogInterceptor())
+                .build();
+    }
+
+    private ConnectionProvider createConnectionProvider() {
+        return ConnectionProvider.builder("httpConnectionProvider")
+                .maxConnections(100)
+                .maxIdleTime(Duration.ofSeconds(20))
+                .maxLifeTime(Duration.ofSeconds(60))
+                .pendingAcquireTimeout(Duration.ofSeconds(60))
+                .evictInBackground(Duration.ofSeconds(120))
                 .build();
     }
 
