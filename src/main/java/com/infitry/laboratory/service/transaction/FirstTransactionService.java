@@ -36,7 +36,7 @@ public class FirstTransactionService {
 
     @ThreadTrace
     @Transactional(isolation = Isolation.READ_UNCOMMITTED)
-    public void readUncommittedFirstTransactionForJpa(String groupCode) {
+    public void readUncommittedForJpa(String groupCode) {
         var findGroup = groupRepository.findById(1L).orElseThrow(NoSuchElementException::new);
         findGroup.setCode(groupCode);
         groupRepository.save(findGroup);
@@ -50,7 +50,7 @@ public class FirstTransactionService {
 
     @ThreadTrace
     @Transactional(isolation = Isolation.READ_UNCOMMITTED)
-    public void readUncommittedFirstTransactionForMybatis(String groupCode) {
+    public void readUncommittedForMybatis(String groupCode) {
         var findGroup = groupMapper.findById(1L);
         findGroup.setCode(groupCode);
         groupMapper.updateGroup(findGroup);
@@ -64,7 +64,7 @@ public class FirstTransactionService {
 
     @ThreadTrace
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public void readCommittedFirstTransactionForJpa(String groupCode) {
+    public void readCommittedForJpa(String groupCode) {
         var findGroup = groupRepository.findById(1L).orElseThrow(NoSuchElementException::new);
         findGroup.setCode(groupCode);
         groupRepository.save(findGroup);
@@ -78,7 +78,7 @@ public class FirstTransactionService {
 
     @ThreadTrace
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public void readCommittedFirstTransactionForMybatis(String groupCode) {
+    public void readCommittedForMybatis(String groupCode) {
         var findGroup = groupMapper.findById(1L);
         findGroup.setCode(groupCode);
         groupMapper.updateGroup(findGroup);
@@ -92,7 +92,7 @@ public class FirstTransactionService {
 
     @ThreadTrace
     @Transactional(isolation = Isolation.REPEATABLE_READ)
-    public void repeatableReadFirstTransactionForJpa(String groupCode) {
+    public void repeatableReadForJpa(String groupCode) {
         var findGroup = groupRepository.findById(1L).orElseThrow(NoSuchElementException::new);
         findGroup.setCode(groupCode);
         groupRepository.save(findGroup);
@@ -106,7 +106,7 @@ public class FirstTransactionService {
 
     @ThreadTrace
     @Transactional(isolation = Isolation.REPEATABLE_READ)
-    public void repeatableReadFirstTransactionForMybatis(String groupCode) {
+    public void repeatableReadForMybatis(String groupCode) {
         var findGroup = groupMapper.findById(1L);
         findGroup.setCode(groupCode);
         groupMapper.updateGroup(findGroup);
@@ -120,7 +120,7 @@ public class FirstTransactionService {
 
     @ThreadTrace
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    public void serializableFirstTransactionForJpa(String groupCode) {
+    public void serializableForJpa(String groupCode) {
         var findGroup = groupRepository.findById(1L).orElseThrow(NoSuchElementException::new);
         findGroup.setCode(groupCode);
         groupRepository.save(findGroup);
@@ -134,7 +134,7 @@ public class FirstTransactionService {
 
     @ThreadTrace
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    public void serializableFirstTransactionForMybatis(String groupCode) {
+    public void serializableForMybatis(String groupCode) {
         var findGroup = groupMapper.findById(1L);
         findGroup.setCode(groupCode);
         groupMapper.updateGroup(findGroup);
