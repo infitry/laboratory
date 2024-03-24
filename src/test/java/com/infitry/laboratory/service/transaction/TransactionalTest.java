@@ -32,11 +32,9 @@ public class TransactionalTest {
         var memberId = 1L;
         // when
         var member = memberService.findMember(memberId);
-        System.out.println("member = " + member.getName());
         memberService.updateMemberWithoutTransactional(memberId);
         var updatedMember = memberService.findMember(memberId);
-        System.out.println("updatedMember = " + updatedMember.getName());
         // then
-        assertNotEquals(updatedMember.getName(), member.getName(), "Dirty checking 이 동작하지 않아야 한다.");
+        assertEquals(updatedMember.getName(), member.getName(), "Dirty checking 이 동작하지 않아야 한다.");
     }
 }
