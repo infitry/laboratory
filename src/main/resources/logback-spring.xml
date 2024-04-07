@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <!-- 로그 파일이 저장될 경로 -->
+    <property name="LOG_PATH" value="${application.home:-.}/logs"/>
+    <!-- 로그 파일 이름 -->
+    <property name="LOG_FILE_NAME" value="jackong"/>
+    <!-- 로그 출력 패턴 -->
+    <property name="LOG_PATTERN" value="[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%thread] %replace([%X{traceId}, %X{spanId}]){'\[, \]',''}[%logger{0}:%line] - %msg%n"/>
+
+    <!-- CONSOLE 에 로그 출력 세팅 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>${LOG_PATTERN}</Pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="test,local">
+        <root level="DEBUG">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+</configuration>

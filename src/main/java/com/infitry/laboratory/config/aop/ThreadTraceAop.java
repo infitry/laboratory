@@ -5,6 +5,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.util.StopWatch;
 
 @Slf4j
 @Aspect
@@ -15,14 +16,14 @@ public class ThreadTraceAop {
 
     @Around("threadTrace()")
     public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
-        long start = System.currentTimeMillis();
-        log.info("[START] ---- " + joinPoint + " ----");
+        var stopWatch = new StopWatch();
+        stopWatch.start();
+        log.info("[START] ---- {} ----", joinPoint);
         try {
             return joinPoint.proceed();
         } finally {
-            long finish = System.currentTimeMillis();
-            long timeMs = finish - start;
-            log.info("[END] ---- " + joinPoint + " " + timeMs + " ms ----");
+            stopWatch.stop();
+            log.info("[END] ---- {}, {} ms ----", joinPoint, stopWatch.getTotalTimeMillis());
         }
     }
 }

@@ -5,3 +5,5 @@
 2. WebClient 의 각각의 타임아웃 설정
 3. stream() vs parallelStream()
 4. Race condition
+5. 분산락
+6. Spring Cloud sleuth -> Micrometer 로 tracing 기능 사용하기
