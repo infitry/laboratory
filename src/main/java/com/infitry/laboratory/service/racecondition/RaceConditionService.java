@@ -9,8 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class RaceConditionService {
 
-    public void raceCondition(Long millis) throws InterruptedException {
+    public void raceCondition(Long millis) {
         // 뭔가 많이한다.
-        Thread.sleep(millis);
+        try {
+            Thread.sleep(millis);
+        } catch (Exception e) {
+            log.error("sleep failed", e);
+        }
     }
 }

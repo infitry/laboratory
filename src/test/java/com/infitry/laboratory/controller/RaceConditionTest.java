@@ -44,12 +44,8 @@ class RaceConditionTest {
 
     private void runService(int user) {
         Long waitTimeMillis = 1000L;
-        try {
-            raceConditionService.raceCondition(waitTimeMillis);
-            System.out.println("Users = " + user + " is OK");
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        raceConditionService.raceCondition(waitTimeMillis);
+        System.out.println("Users = " + user + " is OK");
     }
 
     private static ArrayList<Integer> createUsers(int testCount) {
