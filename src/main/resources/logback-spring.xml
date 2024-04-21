@@ -3,7 +3,7 @@
     <!-- 로그 파일이 저장될 경로 -->
     <property name="LOG_PATH" value="${application.home:-.}/logs"/>
     <!-- 로그 파일 이름 -->
-    <property name="LOG_FILE_NAME" value="jackong"/>
+    <property name="LOG_FILE_NAME" value="laboratory"/>
     <!-- 로그 출력 패턴 -->
     <property name="LOG_PATTERN" value="[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%thread] %replace([%X{traceId}, %X{spanId}]){'\[, \]',''}[%logger{0}:%line] - %msg%n"/>
 

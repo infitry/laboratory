@@ -1,5 +1,7 @@
 logging:
   level:
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    com.zaxxer.hikari: TRACE
     root: INFO
 
 server:
@@ -11,18 +13,25 @@ spring:
   profiles:
     active: local
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/laboratory
-    username: root
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:./data/laboratory;MODE=MySQL;
+    username: sa
     password:
+    hikari:
+      connection-timeout: 3000
+      validation-timeout: 3000
+      minimum-idle: 5
+      max-lifetime: 240000
+      maximum-pool-size: 5
   jpa:
     show-sql: true
     open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
     hibernate:
-      ddl-auto: none
-      properties:
-        hibernate:
-          format_sql: true
+      ddl-auto: create
       defer-datasource-initialization: true
   redis:
     host: localhost

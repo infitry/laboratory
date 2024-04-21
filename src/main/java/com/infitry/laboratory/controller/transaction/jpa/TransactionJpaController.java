@@ -1,7 +1,7 @@
 package com.infitry.laboratory.controller.transaction.jpa;
 
-import com.infitry.laboratory.service.transaction.FirstTransactionService;
-import com.infitry.laboratory.service.transaction.SecondTransactionService;
+import com.infitry.laboratory.service.transaction.isolation.FirstTransactionService;
+import com.infitry.laboratory.service.transaction.isolation.SecondTransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.infitry.laboratory.service.transaction;
+package com.infitry.laboratory.service.transaction.isolation;
 
 import com.infitry.laboratory.config.aop.ThreadTrace;
 import com.infitry.laboratory.entity.MemberGroup;
