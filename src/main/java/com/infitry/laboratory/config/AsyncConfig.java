@@ -34,7 +34,7 @@ public class AsyncConfig implements AsyncConfigurer, WebMvcConfigurer {
         var threadPoolTaskScheduler = new ThreadPoolTaskScheduler() {
             @Override
             public ScheduledExecutorService getScheduledExecutor() throws IllegalStateException {
-                return ContextScheduledExecutorService.wrap(super.getScheduledExecutor());
+                return ContextScheduledExecutorService.wrap(super.getScheduledExecutor(), ContextSnapshot::captureAll);
             }
         };
         threadPoolTaskScheduler.initialize();
