@@ -20,8 +20,9 @@ import static lombok.AccessLevel.PRIVATE;
 public class Order {
 
     @Id
+    @Column(name = "ORDER_ID")
     @GeneratedValue(strategy = IDENTITY)
-    Long orderId;
+    Long id;
 
     @Column
     String orderName;
