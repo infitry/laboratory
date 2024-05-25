@@ -13,3 +13,4 @@
 5. Race condition
 6. 분산락
 7. Spring Cloud sleuth -> Micrometer 로 tracing 기능 사용하기
+8. Self invocation
