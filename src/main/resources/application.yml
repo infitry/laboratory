@@ -1,8 +1,9 @@
-logging:
-  level:
-    com.zaxxer.hikari.HikariConfig: DEBUG
-    com.zaxxer.hikari: TRACE
-    root: INFO
+logging.level:
+  com.zaxxer.hikari.HikariConfig: DEBUG
+  com.zaxxer.hikari: TRACE
+  org.hibernate.SQL: DEBUG
+  org.hibernate.orm.jdbc.bind: TRACE
+  root: INFO
 
 server:
   shutdown: graceful
@@ -24,7 +25,6 @@ spring:
       max-lifetime: 240000
       maximum-pool-size: 5
   jpa:
-    show-sql: true
     open-in-view: false
     properties:
       hibernate:
