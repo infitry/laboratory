@@ -1,0 +1,1 @@
+INSERT INTO TB_MEMBER(NAME, NICK_NAME, PASSWORD, AGE) VALUES ('tester', 'tester_nick', '321231', '12');
