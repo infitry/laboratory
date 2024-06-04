@@ -15,3 +15,4 @@
 7. Spring Cloud sleuth -> Micrometer 로 tracing 기능 사용하기
 8. Self invocation
 9. JVM Heap 부하
+10. Redis cache
