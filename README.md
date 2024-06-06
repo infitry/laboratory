@@ -17,3 +17,4 @@ local 에서 Redis 를 6380 포트로 실행합니다.
 9. JVM Heap 부하
 10. Redis cache
 11. Redis hashes cache with AOP
+12. hikari CP monitoring

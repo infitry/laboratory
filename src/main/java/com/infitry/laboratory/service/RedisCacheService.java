@@ -23,7 +23,7 @@ public class RedisCacheService {
 
     @HashesCacheable(cacheName = "memberCache", ttl = 3600)
     public MemberDto findCustomCache(Long id) {
-        log.info("No use cache user: {}", id);
+        log.info("Users who don't use cache: {}", id);
         return MemberDto.from(memberRepository.findById(id).orElseThrow());
     }
 
