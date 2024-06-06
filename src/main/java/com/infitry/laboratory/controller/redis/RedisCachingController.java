@@ -17,4 +17,13 @@ public class RedisCachingController {
     public MemberDto cacheData(@PathVariable Long key) {
         return redisCacheService.findCacheMember(key);
     }
+    @GetMapping("/hashes/{key}")
+    public MemberDto customCacheData(@PathVariable Long key) {
+        return redisCacheService.findCustomCache(key);
+    }
+
+    @GetMapping("/hashes/clear")
+    public void clearCache() {
+        redisCacheService.evictCache();
+    }
 }
