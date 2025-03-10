@@ -18,3 +18,4 @@ local 에서 Redis 를 6380 포트로 실행합니다.
 10. Redis cache
 11. Redis hashes cache with AOP
 12. hikari CP monitoring
+13. platform thread 와 virtual thread 비교
