@@ -11,6 +11,20 @@ import java.util.stream.IntStream;
 @Service
 public class ThreadService {
     /**
+     * fork join pool thread
+     */
+    public void forkJoinPoolThread() {
+        final var loopCount = 100;
+        var futures = IntStream.range(0, loopCount)
+                .mapToObj(i -> CompletableFuture.runAsync(ThreadService::doHeavyTask))
+                .toList();
+
+        var allOf = CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
+        allOf.join();
+    }
+
+
+    /**
      * platform thread
      */
     public void platformThread() {
@@ -58,6 +72,9 @@ public class ThreadService {
 
         ThreadService threadService = new ThreadService();
         switch (threadType) {
+            case FORK_JOIN_POOL:
+                threadService.forkJoinPoolThread();
+                break;
             case PLATFORM:
                 threadService.platformThread();
                 break;
@@ -68,6 +85,6 @@ public class ThreadService {
     }
 
     public enum ThreadType {
-        PLATFORM, VIRTUAL
+        FORK_JOIN_POOL, PLATFORM, VIRTUAL
     }
 }
