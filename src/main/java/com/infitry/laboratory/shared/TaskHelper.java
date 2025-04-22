@@ -9,18 +9,18 @@ import java.util.Random;
 @Slf4j
 @UtilityClass
 public class TaskHelper {
-    public void simulateHeavyTaskFailure() {
+    public void simulateHeavyTaskFailure(RuntimeException exception) {
         printLogWithThread("실행 중 : {}");
         sleep(2000);
         printLogWithThread("완료 : {}");
-        throw new IllegalStateException();
+        throw exception;
     }
 
-    public void doHeavyTaskMaybeFail() {
+    public void doHeavyTaskMaybeFail(int retry) {
         printLogWithThread("실행 중 : {}");
         sleep(2000);
         var random = new Random();
-        var randomNumber = random.nextInt(10);
+        var randomNumber = random.nextInt(retry);
         if (NumberUtil.isEven(randomNumber)) {
             throw new IllegalStateException();
         }

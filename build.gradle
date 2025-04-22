@@ -37,7 +37,6 @@ dependencies {
 
     // retry
     implementation("org.springframework.retry:spring-retry")
-    implementation("org.springframework:spring-aspects")
 
     compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
