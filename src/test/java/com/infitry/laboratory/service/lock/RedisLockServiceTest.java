@@ -16,7 +16,7 @@ class RedisLockServiceTest {
     private RedisLockService redisLockService;
 
     @Test
-    @DisplayName("다른 스레드가 접근하지 못하게 LOCK 합니다. (Local redis 6380 port 필요)")
+    @DisplayName("다른 스레드가 접근하지 못하게 LOCK 합니다. (Local redis 6379 port 필요)")
     public void noRetryLock() {
         // given
         var id = "lock-1";
